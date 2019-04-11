@@ -232,14 +232,17 @@ if needed, the update is distributed to applicable replicas.
 
 [float]
 [[index-wait-for-active-shards]]
-=== Wait For Active Shards
+=== Wait For Active Shards (等待多个操作一起发送)
 
 To improve the resiliency of writes to the system, indexing operations
 can be configured to wait for a certain number of active shard copies
-before proceeding with the operation. If the requisite number of active
-shard copies are not available, then the write operation must wait and
-retry, until either the requisite shard copies have started or a timeout
-occurs. By default, write operations only wait for the primary shards
+before proceeding with the operation.（为了改善系统写入性能的弹性，索引操
+作可以配置为，在执行操作前需要等待一定数量的活动分片副本。） If the requisite
+number of active shard copies are not available, then the write operation
+must wait and retry, until either the requisite shard copies have started
+or a timeout occurs.（如果没有达到必需数量的活动副本，这时写操作必须等待或重试，
+一直等到活动 副本数量达到或者超时）
+By default, write operations only wait for the primary shards
 to be active before proceeding (i.e. `wait_for_active_shards=1`).
 This default can be overridden in the index settings dynamically
 by setting `index.write.wait_for_active_shards`. To alter this behavior
